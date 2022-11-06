@@ -11,7 +11,7 @@ CREATE TABLE trade (
 
 set global local_infile = 1;
 
-LOAD DATA LOCAL INFILE 'trade_dev.csv' 
+LOAD DATA LOCAL INFILE 'trade.csv' 
 INTO TABLE trade 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -21,7 +21,8 @@ IGNORE 1 ROWS;
 !SELECT * from trade;
 
 SELECT stocksymbol, time,
-avg(price) OVER(PARTITION BY stocksymbol ORDER BY time ROWS 4 PRECEDING)
-FROM trade;
+avg(price) OVER(PARTITION BY stocksymbol ORDER BY time ROWS 4 PRECEDING) as unweighted_moving_avg
+FROM trade
+ORDER BY time;
 
 
