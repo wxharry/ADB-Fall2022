@@ -51,6 +51,5 @@ FROM (
 ) AS friend_like
 LEFT JOIN like_rel
 ON friend_like.person1 = like_rel.person and friend_like.artist = like_rel.artist
-WHERE like_rel.artist IS NULL;
-
-
+WHERE like_rel.artist IS NULL
+ORDER BY person1 ASC, person2 ASC, friend_like.artist ASC;
