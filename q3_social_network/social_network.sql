@@ -34,22 +34,26 @@ IGNORE 1 ROWS;
 
 -- SELECT * from like_rel;
 
-SELECT person1, person2, friend_like.artist
+SELECT DISTINCT person1, person2, friend2_like.artist as artist
 FROM (
 	SELECT person1, person2, artist
-	FROM (
-		SELECT *
-		FROM friend as f1
-		WHERE EXISTS (
-			SELECT *
-			FROM friend as f2
-			WHERE f1.person1 = f2.person2 and f1.person2 = f2.person1
-		)
-	) as mutual_friend
+	FROM friend
 	LEFT JOIN like_rel
-	ON mutual_friend.person2 = like_rel.person
-) AS friend_like
+	ON friend.person2 = like_rel.person
+) AS friend2_like
 LEFT JOIN like_rel
-ON friend_like.person1 = like_rel.person and friend_like.artist = like_rel.artist
+ON friend2_like.person1 = like_rel.person and friend2_like.artist = like_rel.artist
 WHERE like_rel.artist IS NULL
-ORDER BY person1 ASC, person2 ASC, friend_like.artist ASC;
+UNION
+SELECT DISTINCT person2, person1, friend1_like.artist as artist
+FROM (
+	SELECT person1, person2, artist
+	FROM friend
+	LEFT JOIN like_rel
+	ON friend.person1 = like_rel.person
+) AS friend1_like
+LEFT JOIN like_rel
+ON friend1_like.person2 = like_rel.person and friend1_like.artist = like_rel.artist
+WHERE like_rel.artist IS NULL;
+
+-- 7308105 rows in set (21.19 sec)
