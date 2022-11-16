@@ -1,0 +1,8 @@
+CREATE TABLE trade_fractal (stocksymbol VARCHAR(255) NOT NULL, time INT, quantity INT, price INT)
+
+LOAD DATA INFILE "trade_fractal.csv"
+INTO TABLE trade_fractal
+FIELDS TERMINATED BY ","
+
+SELECT stocksymbol, time, quantity, price
+FROM trade_fractal

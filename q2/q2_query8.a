@@ -1,0 +1,17 @@
+CREATE TABLE trade_uniform (stocksymbol VARCHAR(255) NOT NULL, time INT, quantity INT, price INT)
+CREATE TABLE trade_uniform_dummy1 (stocksymbol VARCHAR(255) NOT NULL, time INT, quantity INT, price INT)
+
+LOAD DATA INFILE "trade_uniform.csv"
+INTO TABLE trade_uniform
+FIELDS TERMINATED BY ","
+
+
+LOAD DATA INFILE "trade_uniform.csv"
+INTO TABLE trade_uniform_dummy1
+FIELDS TERMINATED BY ","
+
+SELECT trade_uniform.stocksymbol
+FROM trade_uniform
+LEFT JOIN trade_uniform_dummy1
+ON trade_uniform.time = trade_uniform_dummy1.time
+WHERE trade_uniform.price > 100

@@ -1,0 +1,8 @@
+CREATE TABLE trade_uniform (stocksymbol VARCHAR(255) NOT NULL, time INT, quantity INT, price INT)
+
+LOAD DATA INFILE "trade_uniform.csv"
+INTO TABLE trade_uniform
+FIELDS TERMINATED BY ","
+
+SELECT stocksymbol, time, quantity, price
+FROM trade_uniform
