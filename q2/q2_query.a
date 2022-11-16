@@ -1,0 +1,62 @@
+
+CREATE TABLE trade_fractal (stocksymbol VARCHAR(255) NOT NULL, time INT, quantity INT, price INT)
+CREATE TABLE trade_fractal_dummy1 (stocksymbol VARCHAR(255) NOT NULL, time VARCHAR(255) NOT NULL, quantity INT, price INT)
+CREATE TABLE trade_fractal_dummy2 (stocksymbol VARCHAR(255) NOT NULL, time INT, quantity INT, price INT)
+
+
+LOAD DATA INFILE "trade_fractal.csv"
+INTO TABLE trade_fractal
+FIELDS TERMINATED BY ","
+
+
+SELECT DISTINCT stocksymbol, time, quantity, price
+FROM trade_fractal
+
+SELECT stocksymbol, time, quantity, price
+FROM trade_fractal
+
+
+SELECT stocksymbol
+FROM trade_fractal
+LEFT JOIN trade_fractal_dummy1
+ON trade_fractal.time = trade_fractal_dummy1.time
+WHERE trade_fractal.price > 100
+
+
+SELECT stocksymbol
+FROM trade_fractal
+LEFT JOIN trade_fractal_dummy2
+ON trade_fractal.time = trade_fractal_dummy2.time
+WHERE trade_fractal.price > 100
+
+CREATE TABLE trade_uniform (stocksymbol VARCHAR(255) NOT NULL, time INT, quantity INT, price INT)
+CREATE TABLE trade_uniform_dummy1 (stocksymbol VARCHAR(255) NOT NULL, time VARCHAR(255) NOT NULL, quantity INT, price INT)
+CREATE TABLE trade_uniform_dummy2 (stocksymbol VARCHAR(255) NOT NULL, time INT, quantity INT, price INT)
+
+
+LOAD DATA INFILE "trade_uniform.csv"
+INTO TABLE trade_uniform
+FIELDS TERMINATED BY ","
+
+
+SELECT DISTINCT stocksymbol, time, quantity, price
+FROM trade_uniform
+
+
+SELECT stocksymbol, time, quantity, price
+FROM trade_uniform
+
+
+SELECT stocksymbol
+FROM trade_uniform
+LEFT JOIN trade_uniform_dummy1
+ON trade_uniform.time = trade_uniform_dummy1.time
+WHERE trade_uniform.price > 100
+
+
+SELECT stocksymbol
+FROM trade_uniform
+LEFT JOIN trade_uniform_dummy2
+ON trade_uniform.time = trade_uniform_dummy2.time
+WHERE trade_uniform.price > 100
+
