@@ -18,7 +18,7 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-!SELECT * from trade;
+-- SELECT * from trade;
 
 select stocksymbol, sum(quantity * price)/sum(quantity) as weighted_average_price from trade group by stocksymbol;
 
