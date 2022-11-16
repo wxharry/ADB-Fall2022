@@ -18,7 +18,7 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-SELECT * from trade;
+-- SELECT * from trade;
 
 SELECT stocksymbol, max(price - minium) as max_profit
 FROM (

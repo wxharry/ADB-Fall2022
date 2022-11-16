@@ -18,7 +18,7 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-SELECT * from trade;
+-- SELECT * from trade;
 
 SELECT stocksymbol, time,
 	sum(price * quantity) OVER w  / sum(quantity) OVER w as weighted_moving_avg
