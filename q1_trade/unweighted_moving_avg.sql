@@ -21,7 +21,7 @@ IGNORE 1 ROWS;
 -- SELECT * from trade;
 
 SELECT stocksymbol, time,
-avg(price) OVER(PARTITION BY stocksymbol ORDER BY time ROWS 4 PRECEDING) as unweighted_moving_avg
+avg(price) OVER(PARTITION BY stocksymbol ORDER BY time ROWS 9 PRECEDING) as unweighted_moving_avg
 FROM trade
 ORDER BY time;
 
